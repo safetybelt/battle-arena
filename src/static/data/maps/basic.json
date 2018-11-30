@@ -1,0 +1,79 @@
+[
+    [
+        {
+            "tiles": ["HALF_WALL_HORIZ_CORNER_RIGHT_DOWN"],
+            "clip": true
+        }, {
+            "tiles": ["HALF_WALL_HORIZ"],
+            "clip": true
+        }, {
+            "tiles": ["HALF_WALL_HORIZ_VAR_1"],
+            "clip": true
+        }, {
+            "tiles": ["HALF_WALL_HORIZ"],
+            "clip": true
+        }, {
+            "tiles": ["HALF_WALL_HORIZ_CORNER_LEFT_DOWN"],
+            "clip": true
+        }
+    ], [
+        {
+            "tiles": ["DIRT", "HALF_WALL_VERT_LEFT"],
+            "clip": "left"
+        }, {
+            "tiles": ["DIRT", "BONES_1"]
+        }, {
+            "tiles": ["DIRT"]
+        }, {
+            "tiles": ["DIRT"]
+        }, {
+            "tiles": ["DIRT", "HALF_WALL_VERT_RIGHT"],
+            "clip": "right"
+        }
+    ], [
+        {
+            "tiles": ["DIRT", "HALF_WALL_VERT_LEFT"],
+            "clip": "left"
+        }, {
+            "tiles": ["DIRT"]
+        }, {
+            "tiles": ["DIRT"]
+        }, {
+            "tiles": ["DIRT"]
+        }, {
+            "tiles": ["DIRT", "HALF_WALL_VERT_RIGHT"],
+            "clip": "right"
+        }
+    ], [
+        {
+            "tiles": ["DIRT", "HALF_WALL_VERT_LEFT"],
+            "clip": "left"
+        }, {
+            "tiles": ["DIRT"]
+        }, {
+            "tiles": ["DIRT", "DIRT_BUMPS_1"]
+        }, {
+            "tiles": ["DIRT"]
+        }, {
+            "tiles": ["DIRT", "HALF_WALL_VERT_RIGHT"],
+            "clip": "right"
+        }
+    ], [
+        {
+            "tiles": ["HALF_WALL_HORIZ_CORNER_LEFT_UP"],
+            "clip": true
+        }, {
+            "tiles": ["HALF_WALL_HORIZ"],
+            "clip": true
+        }, {
+            "tiles": ["HALF_WALL_HORIZ"],
+            "clip": true
+        }, {
+            "tiles": ["DIRT", "HALF_WALL_HORIZ_VAR_2"],
+            "clip": true
+        }, {
+            "tiles": ["HALF_WALL_HORIZ_CORNER_RIGHT_UP"],
+            "clip": true
+        }
+    ]
+]

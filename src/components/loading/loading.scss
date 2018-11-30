@@ -1,0 +1,61 @@
+@import "~css/constants.scss";
+
+$pulse-duration: 750ms;
+$base-size: 4rem;
+
+@keyframes pulse {
+    50% {
+        background: $white;
+    }
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 90;
+    .pulse-loading {
+        animation: pulse $pulse-duration infinite;
+        animation-delay: ($pulse-duration / 3);
+        background: $text-disabled;
+        border-radius: 0.25rem;
+        height: $base-size;
+        left: 0;
+        margin: 6.5rem auto;
+        position: fixed;
+        right: 0;
+        top: 25vh;
+        width: ($base-size / 4);
+        z-index: 100;
+        &:before,
+        &:after {
+            animation: pulse $pulse-duration infinite;
+            background: $text-disabled;
+            border-radius: 0.25rem;
+            content: '';
+            display: block;
+            height: ($base-size / 1.5);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: ($base-size / 4);
+        }
+        &:before {
+            left: -($base-size / 2);
+        }
+        &:after {
+            animation-delay: ($pulse-duration / 1.5);
+            left: ($base-size / 2);
+        }
+    }
+}
+
+.loading-background-cover {
+    background: $black;
+    opacity: 0.5;
+    z-index: 99;
+    height: 100vh;
+    width: 100vw;
+}

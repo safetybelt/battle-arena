@@ -1,0 +1,17 @@
+# logs
+*.log
+*.debug
+
+# build directory
+public
+
+# dependencies
+node_modules
+
+server/env.json
+
+# python
+*.pyc
+__pycache__
+
+.DS_Store
