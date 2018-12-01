@@ -82,15 +82,22 @@ export const LIGHT_MUSHROOMS_4 = [2, 4];
 export const RED_MUSHROOMS_1 = [1, 3];
 export const RED_MUSHROOMS_2 = [1, 4];
 
+// OTHER
+export const COLUMN_BASE = [1, 6];
+export const COLUMN_MID = [3, 6];
+export const COLUMN_MID_CRACKED = [3, 5];
+export const COLUMN_TOP = [0, 5];
+export const COLUMN_MID_BROKEN = [4, 6];
+
 
 /**********************
  * CHARACTERS.png
  **********************/
 
 // PLAYERS
-export const PLAYER_1 = [1, 0];
-export const PLAYER_2 = [1, 1];
-export const PLAYER_3 = [1, 2];
-export const PLAYER_4 = [1, 3];
+export const PLAYER_1 = [0, 0];
+export const PLAYER_2 = [0, 1];
+export const PLAYER_3 = [0, 2];
+export const PLAYER_4 = [0, 3];
 
 /* eslint-enable */

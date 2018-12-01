@@ -49,49 +49,49 @@
     ], [
         {
             "tiles": ["VERT_WALL_TOP"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["HORIZ_WALL_MIDDLE"],
-            "clip": true
+            "clip": "low"
         }, {
             "tiles": ["VERT_WALL_TOP"],
-            "clip": true
+            "clip": "low"
         }
     ], [
         {
@@ -228,7 +228,7 @@
         }, {
             "tiles": ["DIRT"]
         }, {
-            "tiles": ["DIRT"]
+            "tiles": ["DIRT", "COLUMN_MID_BROKEN"]
         }, {
             "tiles": ["DIRT"]
         }, {
@@ -262,7 +262,8 @@
         }, {
             "tiles": ["DIRT"]
         }, {
-            "tiles": ["DIRT"]
+            "tiles": ["DIRT", "COLUMN_BASE"],
+            "clip": true
         }, {
             "tiles": ["DIRT"]
         }, {

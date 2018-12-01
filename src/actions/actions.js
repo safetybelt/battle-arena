@@ -3,3 +3,7 @@ export const SET_ERROR = 'SET_ERROR';
 
 // LOADING
 export const SET_LOADING = 'SET_LOADING';
+
+// PLAYER
+export const MOVE_PLAYER = 'MOVE_PLAYER';
+export const UPDATE_PLAYER_HEALTH = 'UPDATE_PLAYER_HEALTH';

@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TILES, SPRITE_SIZE } from 'utils';
 import './map.scss';
 
 const maps = [
     require('data/maps/default.json'),
 ];
-const TILES = require('data/tiles.js');
-const SPRITE_SIZE = 17;         // 16 px square with 1 px margin between each
 
 function getBackgroundPosition(tile) {
     tile = TILES[tile];
     if (!tile || tile.length !== 2) {
         return null;
     }
-    const x = tile[0] * SPRITE_SIZE;
-    const y = tile[1] * SPRITE_SIZE;
+    const x = tile[0] * (SPRITE_SIZE + 1);
+    const y = tile[1] * (SPRITE_SIZE + 1);
 
     return `-${x}px -${y}px`;
 }
