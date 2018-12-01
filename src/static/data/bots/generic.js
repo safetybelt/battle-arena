@@ -1,0 +1,3 @@
+function pathToPoint(self, point) {
+
+}
