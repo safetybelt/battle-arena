@@ -12,4 +12,12 @@
         right: 0;
         top: 0;
     }
+
+    .health {
+        position: absolute;
+        top: -6px;
+        height: 4px;
+        width: 16px;
+        background-color: lime;
+    }
 }

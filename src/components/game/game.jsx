@@ -14,7 +14,7 @@ class Game extends React.Component {
 
     startLoop() {
         this.setState({
-            interval: window.setInterval(() => this.props.gameLoop(this.props.players), 1000),
+            interval: window.setInterval(() => this.props.gameLoop(this.props.players), 100),
         });
     }
 
@@ -33,12 +33,19 @@ class Game extends React.Component {
                 <button onClick={this.stopLoop.bind(this)}>Stop Game!</button>
                 <Map>
                     {players.map((player, i) => (
-                        <Player key={i} {...player} />
+                        <div className={`player-wrapper player-${i}`} key={i}>
+                            <Player {...player} />
+                            {player.projectiles.map((p, k) => (
+                                <div className="projectile" key={k} style={{ left: p.position[0], top: p.position[1] }}></div>
+                            ))}
+                        </div>
                     ))}
-                    {game && game.rays && Object.keys(game.rays).map((k) => (
-                        game.rays[k].map((point, i) => (
-                            <div key={i} className="point" style={{ left: point[0], top: point[1] }}></div>
-                        ))
+                    {game && game.rays && Object.keys(game.rays).map((k, i) => (
+                        <div key={i} className={`ray-wrapper ray-${i}`}>
+                            {game.rays[k].map((point, j) => (
+                                <div key={j} className="point" style={{ left: point[0], top: point[1] }}></div>
+                            ))}
+                        </div>
                     ))}
                 </Map>
             </div>

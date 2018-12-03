@@ -16,8 +16,9 @@ function getBackgroundPosition(tile) {
     return `-${x}px -${y}px`;
 }
 
-const Player = ({ position, tiles }) => (
+const Player = ({ position, tiles, health, maxHealth }) => (
     <div className="player" style={{ left: position[0], top: position[1] }}>
+        <div className="health" style={{ width: `${(health / maxHealth) * 100}%` }}></div>
         {tiles.map((tile, i) => (
             <div key={i} className="player-tile-stack" style={{ backgroundPosition: getBackgroundPosition(tile)}}></div>
         ))}
@@ -27,6 +28,8 @@ const Player = ({ position, tiles }) => (
 Player.propTypes = {
     position: PropTypes.arrayOf(PropTypes.number),
     tiles: PropTypes.arrayOf(PropTypes.string),
+    health: PropTypes.number,
+    maxHealth: PropTypes.number,
 };
 
 export default Player;

@@ -3,6 +3,10 @@ export const SET_ERROR = 'SET_ERROR';
 
 // GAME
 export const ADD_RAY = 'ADD_RAY';
+export const FIRE_PROJECTILE = 'FIRE_PROJECTILE';
+export const PROJECTILE_HIT = 'PROJECTILE_HIT';
+export const REMOVE_PROJECTILE = 'REMOVE_PROJECTILE';
+export const UPDATE_PROJECTILE = 'UPDATE_PROJECTILE';
 
 // LOADING
 export const SET_LOADING = 'SET_LOADING';

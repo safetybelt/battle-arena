@@ -28,10 +28,32 @@
         top: 0;
     }
 
-    .point {
-        background-color: red;
-        position: absolute;
-        height: 1px;
-        width: 1px;
+    .ray-wrapper {
+        .point {
+            background-color: blue;
+            position: absolute;
+            height: 1px;
+            width: 1px;
+        }
+
+        &.ray-0 {
+            .point {
+                background-color: red;
+            }
+        }
+    }
+
+    .player-wrapper {
+        .projectile {
+            background-color: purple;
+            position: absolute;
+            height: 4px;
+            width: 4px;
+        }
+        &.player-0 {
+            .projectile {
+                background-color: orange;
+            }
+        }
     }
 }

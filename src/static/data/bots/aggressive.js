@@ -1,4 +1,4 @@
-import { getAngleBetweenPoints, getDistance } from 'utils';
+import { SPRITE_SIZE, getAngleBetweenPoints, getDistance, toRads } from 'utils';
 
 const desiredDistance = 25;
 
@@ -16,14 +16,14 @@ export default class AggressiveAI {
             direction = mod * (self.direction + Math.random() * 15);
         }
 
-        const speed = 5;
+        const speed = 2;
 
         return { direction, speed };
     }
 
     getMovementFromEnemy(self, enemy) {
-        const distance = getDistance(self, enemy, true);
-        const speed = 5;
+        const distance = getDistance(self.position, enemy.position, true);
+        const speed = 3;
         const direction = getAngleBetweenPoints(self.position, enemy.position, 'aggro');
 
         return {
@@ -32,25 +32,57 @@ export default class AggressiveAI {
         };
     }
 
-    avoidClipping(direction, speed, map) {
-
-    }
-
-    // aggressive movement charges at the closest enemy it sees
-    movement(self, enemies) {
+    getClosestEnemy(self, enemies = []) {
         let mainEnemy = null;
         // only deal with the closest enemy
         enemies.forEach((enemy) => {
-            const distance = getDistance(self, enemy, true);
+            const distance = getDistance(self.position, enemy.position, true);
             if (!mainEnemy || distance < mainEnemy.distance) {
                 mainEnemy = Object.assign({ distance }, enemy);
             }
         });
 
-        if (mainEnemy) {
-            return this.getMovementFromEnemy(self, mainEnemy);
+        return mainEnemy;
+    }
+
+    // aggressive movement charges at the closest enemy it sees
+    movement(self, enemies) {
+        const enemy = this.getClosestEnemy(self, enemies);
+        if (enemy) {
+            return this.getMovementFromEnemy(self, enemy);
         } else {
             return this.idle(self);
+        }
+    }
+
+    attack(self, enemies = []) {
+        const enemy = this.getClosestEnemy(self, enemies);
+
+        // aggressive, just try to fire a projectile whenever we aren't in melee range and melee if we are
+        if (enemy) {
+            const distance = getDistance(self.position, enemy.position, true);
+            const position = [enemy.position[0] + SPRITE_SIZE / 2, enemy.position[1] + SPRITE_SIZE / 2];
+            return distance <= desiredDistance ? {
+                target: position,
+                type: 'melee',
+            } : {
+                target: position,
+                type: 'projectile',
+            };
+        } else {
+            // if we don't have an enemy, shoot randomly
+            let direction = Math.random() * 360;
+            console.log('direction...', direction);
+            direction = toRads(direction);
+            console.log('dir...', direction);
+
+            const x = Math.round(Math.sin(direction) * 1000);
+            const y = Math.round(Math.cos(direction) * 1000);
+            console.log('x, y', x, y);
+            return {
+                target: [self.position[0] + x, self.position[0] + y],
+                type: 'projectile',
+            };
         }
     }
 }

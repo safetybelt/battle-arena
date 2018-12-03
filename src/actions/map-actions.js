@@ -27,11 +27,30 @@ export function isTileTraversable(x, y, special) {
     return true;
 }
 
-export function checkLineOfSight(player1, player2, special) {
+function isHittingPlayer(x, y, players) {
+    let id = false;
+    players.forEach((player) => {
+        if (x >= player.position[0] && x <= player.position[0] + SPRITE_SIZE && y >= player.position[1] && y <= player.position[1] + SPRITE_SIZE) {
+            id = player.playerId;
+        }
+    });
+    return id;
+}
+
+export function checkLineOfSight(start, end, special = null, maxRange = null, checkPlayerCollision = false) {
+    return (dispatch) => {
+        const p1Pos = [start[0], start[1]];
+        const p2Pos = [end[0], end[1]];
+        const result = dispatch(rayCast(p1Pos, p2Pos, special, maxRange, checkPlayerCollision));
+        return result;
+    }
+}
+
+export function checkPlayerLineOfSight(player1, player2, special = null, maxRange = null) {
     return (dispatch) => {
         const p1Pos = [player1.position[0] + SPRITE_SIZE / 2, player1.position[1] + SPRITE_SIZE / 2];
         const p2Pos = [player2.position[0] + SPRITE_SIZE / 2, player2.position[1] + SPRITE_SIZE / 2];
-        const result = dispatch(rayCast(p1Pos, p2Pos, special, player1.playerId, player2.playerId));
+        const result = dispatch(rayCast(p1Pos, p2Pos, special, maxRange, false, player1.playerId, player2.playerId));
         return result;
     }
 }
@@ -76,25 +95,39 @@ function BresenhamLine(x0, y0, x1, y1) {
 }
 
 // PID is included to specify an ID to attach the ray to (for drawing the result on the map)
-function rayCast(start, end, special, pid1 = null, pid2 = null) {
-    return (dispatch) => {
+function rayCast(start, end, special, maxRange = null, checkPlayerCollision = false, pid1 = null, pid2 = null) {
+    return (dispatch, getState) => {
+        const players = getState().players;
         const result = { doCollide: false, position: null };
-        const ray = BresenhamLine(start[0], start[1], end[0], end[1]);
+        const ray = BresenhamLine(start[0], start[1], end[0], end[1], maxRange);
 
         let reverse = false;
         let rayIdx = 0;
-        if (ray.length) {
 
+        if (ray.length) {
             if (ray[0][0] !== start[0] || ray[0][1] !== start[1]) {
                 rayIdx = ray.length - 1;
                 reverse = true;
             }
 
-            while (!result.doCollide && (reverse ? rayIdx > 0 : rayIdx < ray.length)) {
+            while (!result.doCollide && !result.maxReached && (reverse ? rayIdx > 0 : rayIdx < ray.length)) {
                 const tile = ray[rayIdx];
+
+                if (checkPlayerCollision) {
+                    const collision = isHittingPlayer(tile[0], tile[1], players);
+                    if (collision) {
+                        result.position = ray[rayIdx];
+                        result.doCollide = true;
+                        result.playerCollide = collision;
+                    }
+                }
+
                 if (!isTileTraversable(tile[0], tile[1], special)) {
                     result.position = ray[rayIdx];
                     result.doCollide = true;
+                } else if (reverse ? rayIdx <= ray.length - maxRange : rayIdx >= maxRange) {
+                    result.position = ray[rayIdx];
+                    result.maxReached = true;
                 } else if (reverse) {
                     rayIdx--;
                 } else {
