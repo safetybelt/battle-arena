@@ -1,7 +1,7 @@
 import { SPRITE_SIZE, getAngleBetweenPoints, getDistance } from 'utils';
 
-const safeDistance = 100;
-const maxDistance = 150;
+const safeDistance = 80;
+const maxDistance = 125;
 
 /* eslint-disable complexity, no-magic-numbers */
 export default class BasicAI {
@@ -39,7 +39,8 @@ export default class BasicAI {
             direction = (mod * (direction + 180 + Math.random() * 45)) % 360;
             speed = 4;
         } else if (distance < maxDistance) {
-            speed = 1;
+            const mod = Math.random() < 0.2 ? -1 : 1;
+            direction = (mod * (self.direction + 45)) % 360;
         }
 
         return {

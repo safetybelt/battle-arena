@@ -65,8 +65,8 @@ export const DIRT = [9, 7];
 export const DARK_ROCKS = [12, 10];
 export const LIGHT_ROCKS = [12, 11];
 export const DIRT_ROCKS = [13, 11];
-export const LIGHT_BONES = [16, 11];
-export const BRICK_PILE = [18, 11];
+export const LIGHT_BONES = [12, 14];
+export const BRICK_PILE = [14, 16];
 export const BONES_1 = [0, 2];
 export const BONES_2 = [1, 2];
 export const BONES_3 = [2, 2];
@@ -89,6 +89,22 @@ export const COLUMN_MID_CRACKED = [3, 5];
 export const COLUMN_TOP = [0, 5];
 export const COLUMN_MID_BROKEN = [4, 6];
 
+export const DIRT_ROCK = [0, 0];
+export const DIRT_ROCK_MOSS = [1, 0];
+export const DIRT_ROCK_MOSS_2 = [2, 0];
+export const ROCK = [0, 1];
+export const ROCK_MOSS = [1, 1];
+export const ROCK_MOSS_2 = [2, 1];
+
+export const ROCK_STALAGMITE_TOP = [3, 0];
+export const ROCK_STALAGMITE_BASE = [3, 1];
+export const ROCK_STALAGMITE_TOP_MOSS = [4, 0];
+export const ROCK_STALAGMITE_BASE_MOSS = [4, 1];
+export const STONE_STALAGMITE_TOP = [5, 0];
+export const STONE_STALAGMITE_BASE = [5, 1];
+export const STONE_STALAGMITE_TOP_MOSS = [6, 0];
+export const STONE_STALAGMITE_BASE_MOSS = [6, 1];
+
 
 /**********************
  * CHARACTERS.png
@@ -99,5 +115,60 @@ export const PLAYER_1 = [0, 0];
 export const PLAYER_2 = [0, 1];
 export const PLAYER_3 = [0, 2];
 export const PLAYER_4 = [0, 3];
+
+export const PANTS_BLACK = [3, 0];
+export const PANTS_BROWN = [3, 1];
+export const PANTS_WHITE = [3, 2];
+export const PANTS_ORANGE = [3, 5];
+export const PANTS_TEAL = [3, 6];
+export const PANTS_LILAC = [3, 7];
+export const PANTS_GREEN = [3, 8];
+
+export const TUNIC_BROWN = [6, 0];
+export const TUNIC_BROWN_LONG = [7, 0];
+export const TUNIC_BROWN_V = [8, 0];
+export const TUNIC_TEAL = [10, 0];
+export const TUNIC_TEAL_LONG = [11, 0];
+export const TUNIC_TEAL_V = [12, 0];
+export const TUNIC_LILAC = [14, 0];
+export const TUNIC_LILAC_LONG = [15, 0];
+export const TUNIC_LILAC_V = [16, 0];
+
+export const BROWN_HAIR_1 = [19, 0];
+export const BROWN_HAIR_2 = [20, 0];
+export const BROWN_MOUSTACHE = [21, 0];
+export const BROWN_BEARD = [22, 0];
+export const BROWN_HAIR_BRAID = [20, 1];
+export const BROWN_HAIR_BRAID_2 = [21, 1];
+export const BROWN_HAIR_BRAID_3 = [22, 1];
+export const AUBURN_HAIR_1 = [23, 0];
+export const AUBURN_HAIR_2 = [24, 0];
+export const AUBURN_MOUSTACHE = [25, 0];
+export const AUBURN_BEARD = [26, 0];
+export const AUBURN_HAIR_BRAID = [24, 1];
+export const AUBURN_HAIR_BRAID_2 = [25, 1];
+export const AUBURN_HAIR_BRAID_3 = [26, 1];
+export const BLONDE_HAIR_1 = [19, 4];
+export const BLONDE_HAIR_2 = [24, 4];
+export const BLONDE_MOUSTACHE = [21, 4];
+export const BLONDE_BEARD = [22, 4];
+export const BLONDE_HAIR_BRAID = [20, 5];
+export const BLONDE_HAIR_BRAID_2 = [21, 5];
+export const BLONDE_HAIR_BRAID_3 = [22, 5];
+export const BLACK_HAIR_1 = [23, 4];
+export const BLACK_HAIR_2 = [24, 4];
+export const BLACK_MOUSTACHE = [25, 4];
+export const BLACK_BEARD = [26, 4];
+export const BLACK_HAIR_BRAID = [24, 5];
+export const BLACK_HAIR_BRAID_2 = [25, 5];
+export const BLACK_HAIR_BRAID_3 = [26, 5];
+export const WHITE_HAIR_1 = [19, 8];
+export const WHITE_HAIR_2 = [24, 8];
+export const WHITE_MOUSTACHE = [21, 8];
+export const WHITE_BEARD = [22, 8];
+export const WHITE_HAIR_BRAID = [20, 9];
+export const WHITE_HAIR_BRAID_2 = [21, 9];
+export const WHITE_HAIR_BRAID_3 = [22, 9];
+
 
 /* eslint-enable */

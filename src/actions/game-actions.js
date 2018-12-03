@@ -109,7 +109,7 @@ function removeProjectile(playerId, type) {
 }
 
 // enemy list includes any player that isn't matched to currnet playerId and is visible to playerId
-function getEnemyList(players, player, visionRange = 125) {
+function getEnemyList(players, player, visionRange = 150) {
     return (dispatch) => {
         return players.filter((enemy) => {
             if (player.playerId === enemy.playerId) {

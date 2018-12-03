@@ -2,18 +2,18 @@ import { FIRE_PROJECTILE, PROJECTILE_HIT, REMOVE_PROJECTILE, UPDATE_PROJECTILE, 
 
 const initialState = [{
     playerId: 'defaultUser',
-    position: [200, 200],        // eslint-disable-line no-magic-numbers
+    position: [300, 300],        // eslint-disable-line no-magic-numbers
     health: 150,
     maxHealth: 150,
-    tiles: ['PLAYER_1'],
+    tiles: ['PLAYER_1', 'PANTS_LILAC', 'TUNIC_TEAL', 'AUBURN_BEARD'],
     brain: {},
     projectiles: [],
 }, {
     playerId: 'ai',
-    position: [50, 50],
+    position: [100, 100],
     health: 150,
     maxHealth: 150,
-    tiles: ['PLAYER_2'],
+    tiles: ['PLAYER_2', 'PANTS_BLACK', 'TUNIC_BROWN_LONG', 'WHITE_HAIR_BRAID_3'],
     bot: 'aggressive',
     brain: {},
     projectiles: [],
@@ -22,7 +22,7 @@ const initialState = [{
 //     position: [200, 200],
 //     health: 150,
 //     maxHealth: 150,
-//     tiles: ['PLAYER_3'],
+//     tiles: ['PLAYER_3', 'PANTS_GREEN', 'TUNIC_LILAC_V', 'BLONDE_HAIR_2'],
 //     brain: {},
 //     projectiles: [],
 }];

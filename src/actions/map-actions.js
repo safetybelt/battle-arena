@@ -1,6 +1,6 @@
 import { ADD_RAY } from 'actions';
 import { SPRITE_SIZE } from 'utils';
-import map from 'data/maps/default.json';
+import map from 'data/maps/cave.json';
 
 export function getTile(row, col) {
     return map[row][col];

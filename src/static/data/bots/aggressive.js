@@ -16,7 +16,7 @@ export default class AggressiveAI {
             direction = mod * (self.direction + Math.random() * 15);
         }
 
-        const speed = 2;
+        const speed = 3;
 
         return { direction, speed };
     }

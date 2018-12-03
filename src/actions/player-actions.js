@@ -1,12 +1,10 @@
 import { ADD_TO_BRAIN, REMOVE_FROM_BRAIN, MOVE_PLAYER, UPDATE_PLAYER_HEALTH } from 'actions';
 import { SPRITE_SIZE, toRads } from 'utils';
-import map from 'data/maps/default.json';
+import map from 'data/maps/cave.json';
 
 export const MIN_SPEED = 0;
 export const MAX_SPEED = 5;
 export const MAX_DIRECTION = 360;
-
-// const map = require('data/maps/default.json');
 
 /* eslint-disable complexity */
 function checkClipping(x, y) {
