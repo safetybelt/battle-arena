@@ -3,6 +3,7 @@ import { Game } from 'components';
 import { tick } from 'actions';
 
 const mapStateToProps = (state) => ({
+    game: state.game,
     players: state.players,
 });
 

@@ -1,5 +1,5 @@
 import { ADD_TO_BRAIN, REMOVE_FROM_BRAIN, MOVE_PLAYER, UPDATE_PLAYER_HEALTH } from 'actions';
-import { SPRITE_SIZE, getXYMods, toRads } from 'utils';
+import { SPRITE_SIZE, toRads } from 'utils';
 import map from 'data/maps/default.json';
 
 export const MIN_SPEED = 0;
@@ -9,71 +9,47 @@ export const MAX_DIRECTION = 360;
 // const map = require('data/maps/default.json');
 
 /* eslint-disable complexity */
-function checkClipping(x, y, xm, ym) {
+function checkClipping(x, y) {
     const row = Math.floor(y / SPRITE_SIZE);
     const col = Math.floor(x / SPRITE_SIZE);
     const cell = map[row] && map[row][col];
 
-    if (!cell) {
-        return false;
-    } else if (cell && !cell.clip) {
+    if (cell && !cell.clip) {
         return [x, y];
-    }
-
-    // check the opposite direction of xm and ym to update coordinates that work
-    const newX = x - (SPRITE_SIZE + (x % SPRITE_SIZE) + 1) * -xm;
-    const newY = y - (SPRITE_SIZE + (y % SPRITE_SIZE) + 1) * -ym;
-    const newRow = Math.floor(newY / SPRITE_SIZE);
-    const newCol = Math.floor(newX / SPRITE_SIZE);
-
-    let check = map[newRow] && map[newRow][col];
-    if (check && !check.clip) {
-        return [x, newY];
-    }
-
-    check = map[row][newCol];
-    if (check && !check.clip) {
-        return [newX, y];
-    }
-
-    check = map[newRow] && map[newRow][newCol];
-    if (check && !check.clip) {
-        return [newX, newY];
     }
 
     return false;
 }
 
-function enforceClipping(position, xm, ym) {
+function enforceClipping(position) {
     const [x, y] = position;
 
-    if (xm > 0 || ym > 0) {
-        const origin = checkClipping(x + SPRITE_SIZE, y + SPRITE_SIZE, xm, ym);
-        if (!origin) { return false; }
-        const [mx, my] = origin;
-        return [mx - SPRITE_SIZE, my - SPRITE_SIZE];
-    } else {
-        return checkClipping(x, y, xm, ym);
-    }
+    const topLeft = checkClipping(x, y);
+    const topRight = checkClipping(x + SPRITE_SIZE, y);
+    const bottomLeft = checkClipping(x, y + SPRITE_SIZE);
+    const bottomRight = checkClipping(x + SPRITE_SIZE, y + SPRITE_SIZE);
+
+    return topRight && bottomLeft && bottomRight && topLeft;
 }
 
 function calculateNewPosition(position, direction, speed) {
     /* eslint-disable no-magic-numbers */
-    const { xm, ym } = getXYMods(direction);
-
     direction = toRads(direction);
     /* eslint-enable */
 
     const x = Math.round(Math.sin(direction) * speed);
     const y = Math.round(Math.cos(direction) * speed);
 
-    const origin = enforceClipping([position[0] + x, position[1] + y], xm, ym);
+    const origin = enforceClipping([position[0] + x, position[1] + y]);
 
-    return origin || position;
+    return {
+        position: origin || position,
+        collided: !origin,
+    };
 }
 
 // direction: 0-360 degrees
-// 0 is straight left; 90 straight up; 180 straight right; 270 straight down
+// 0 is straight down; 90 straight right; 180 straight up; 270 straight left
 export function movePlayer(playerId, direction, speed) {
     speed = Math.min(Math.max(speed, MIN_SPEED), MAX_SPEED);
     direction = Math.abs(direction % MAX_DIRECTION);
@@ -83,10 +59,16 @@ export function movePlayer(playerId, direction, speed) {
         if (!player) {
             return null;
         }
+
+        const newPos = calculateNewPosition(player.position, direction, speed);
+
         return dispatch({
             type: MOVE_PLAYER,
             playerId,
-            position: calculateNewPosition(player.position, direction, speed),
+            position: newPos.position,
+            collided: newPos.collided,
+            direction,
+            speed,
         });
     };
 }

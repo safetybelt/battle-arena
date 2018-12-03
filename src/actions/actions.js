@@ -1,6 +1,9 @@
 // ERRORS
 export const SET_ERROR = 'SET_ERROR';
 
+// GAME
+export const ADD_RAY = 'ADD_RAY';
+
 // LOADING
 export const SET_LOADING = 'SET_LOADING';
 

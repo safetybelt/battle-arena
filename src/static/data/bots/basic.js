@@ -1,55 +1,53 @@
-import { getAngleFromXYDistances, getDistance } from 'utils';
+import { getAngleBetweenPoints, getDistance } from 'utils';
 
-const safeDistance = 50;
-const maxDistance = 75;
+const safeDistance = 75;
+const maxDistance = 100;
 
-/* eslint-disable complexity */
+/* eslint-disable complexity, no-magic-numbers */
 export default class BasicAI {
-    getMovementFromEnemy(self, enemy) {
-        const [xd, yd] = getDistance(self, enemy);
-        let x = 0;
-        let y = 0;
-        let xm = 1;
-        let ym = 1;
-
-        if (enemy.distance < safeDistance) {
-            if (self.position[0] < enemy.position[0]) {
-                xm = -1;
-            }
-            if (self.position[1] < enemy.position[1]) {
-                ym = -1;
-            }
-            if (xd > yd) {
-                x -= yd === 0 ? 1 : xd / yd;
-                y -= 1;
-            } else {
-                x -= 1;
-                y -= xd === 0 ? 1 : yd / xd;
-            }
-        } else if (enemy.distance > maxDistance) {
-            if (self.position[0] > enemy.position[0]) {
-                xm = -1;
-            }
-            if (self.position[1] > enemy.position[1]) {
-                ym = -1;
-            }
-            if (xd > yd) {
-                x += yd === 0 ? 1 : xd / yd;
-                y += 1;
-            } else {
-                x += 1;
-                y += xd === 0 ? 1 : yd / xd;
-            }
+    idle(self) {
+        // check to see our last direction, go in the same general direction; if we're colliding with something, reverse direction; if we have no direction, pick one randomly
+        let direction = 0;
+        if (!self.direction) {
+            direction = Math.random() * 360;
+        } else if (self.collided) {
+            direction = (self.direction + 180) % 360;
+        } else {
+            const mod = Math.random() < 0.5 ? -1 : 1;
+            direction = (mod * (self.direction + Math.random() * 15)) % 360;
         }
 
-        const direction = getAngleFromXYDistances(Math.abs(x), Math.abs(y), xm, ym);
         const speed = 5;
 
         return { direction, speed };
     }
 
+    getMovementFromEnemy(self, enemy) {
+        let speed = 5;
+
+        if (self.collided) {
+            const mod = Math.random() < 0.5 ? -1 : 1;
+            const direction = (mod * (self.direction + Math.random() * 90)) % 360;
+            return { direction, speed };
+        }
+
+        const distance = getDistance(self, enemy, true);
+        let direction = getAngleBetweenPoints(self.position, enemy.position);
+
+        if (distance < safeDistance) {
+            direction = (direction + 180) % 360;
+        } else if (distance < maxDistance) {
+            speed = 1;
+        }
+
+        return {
+            direction,
+            speed,
+        };
+    }
+
     // basic movement tries to keep enemies at a safe distance but not too far as to not be able to fire projectiles
-    movement(self, enemies) {
+    movement(self, enemies = []) {
         let mainEnemy = null;
         // only deal with the closest enemy
         enemies.forEach((enemy) => {
@@ -59,7 +57,11 @@ export default class BasicAI {
             }
         });
 
-        return this.getMovementFromEnemy(self, mainEnemy);
+        if (mainEnemy) {
+            return this.getMovementFromEnemy(self, mainEnemy);
+        } else {
+            return this.idle(self);
+        }
     }
 }
 /* eslint-enable */

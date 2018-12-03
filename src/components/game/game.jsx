@@ -14,7 +14,7 @@ class Game extends React.Component {
 
     startLoop() {
         this.setState({
-            interval: window.setInterval(() => this.props.gameLoop(this.props.players), 500),
+            interval: window.setInterval(() => this.props.gameLoop(this.props.players), 1000),
         });
     }
 
@@ -26,7 +26,7 @@ class Game extends React.Component {
     }
 
     render() {
-        const { players } = this.props;
+        const { game, players } = this.props;
         return (
             <div id="game-page">
                 <button onClick={this.startLoop.bind(this)}>Start Game!</button>
@@ -35,6 +35,11 @@ class Game extends React.Component {
                     {players.map((player, i) => (
                         <Player key={i} {...player} />
                     ))}
+                    {game && game.rays && Object.keys(game.rays).map((k) => (
+                        game.rays[k].map((point, i) => (
+                            <div key={i} className="point" style={{ left: point[0], top: point[1] }}></div>
+                        ))
+                    ))}
                 </Map>
             </div>
         );
@@ -42,6 +47,9 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
+    game: PropTypes.shape({
+        ray: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+    }),
     players: PropTypes.arrayOf(PropTypes.object),
     gameLoop: PropTypes.func,
 };
